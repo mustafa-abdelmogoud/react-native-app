@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import {
   Avatar,
   Layout,
@@ -8,12 +8,13 @@ import {
   Divider,
   Button,
   Spinner,
-  Text,
-} from '@ui-kitten/components';
-import Icon from 'react-native-vector-icons/Feather';
-import Header from '../components/header';
+  Text
+} from "@ui-kitten/components";
+import Icon from "react-native-vector-icons/Feather";
+import Header from "../components/header";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function LoginScreen({ navigation, route }) {
+export default function HomeScreen({ navigation, route }) {
   const { id } = route.params;
   const [data, setData] = useState(null);
 
@@ -23,9 +24,26 @@ export default function LoginScreen({ navigation, route }) {
       // const data = await json.json();
       // setData(data);
       setData({
-        id: '1234',
-        name: 'nbjngbjnb',
-        descriptions: ['gnbngb', 'bmgmbkmgb'],
+        id: "1234",
+        name: "nbjngbjnb",
+        diagnosis: [
+          {
+            doctor: "Abdelrhman Saied",
+            description: "description one",
+            hospital: "Jeeda Hospital",
+            diagnose: "Flu",
+            symptoms: ["symptom1"],
+            treatments: ["treatment1"]
+          },
+          {
+            doctor: "Abdelrhman Saied",
+            description: "description two",
+            hospital: "Jeeda Hospital",
+            diagnose: "Covid-19",
+            symptoms: ["symptom1"],
+            treatments: ["treatment1"]
+          }
+        ]
       });
     }
     fetchData();
@@ -33,10 +51,12 @@ export default function LoginScreen({ navigation, route }) {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.button}
-      onPress={() => navigation.navigate('Diagnosis')}
+      style={styles.item}
+      onPress={() => navigation.navigate("Diagnosis", { diagnose: item })}
     >
-      <ListItem title={item} description='DR. Abdelrahman' />
+      <Text> {item.diagnose} </Text>
+      <Text>{item.doctor}</Text>
+      <Text>{item.hospital}</Text>
     </TouchableOpacity>
   );
 
@@ -48,28 +68,28 @@ export default function LoginScreen({ navigation, route }) {
           <View style={styles.info}>
             <Avatar
               style={styles.avatar}
-              size='giant'
-              source={require('../assets/avatar.png')}
+              size="giant"
+              source={require("../assets/avatar.png")}
             />
             <Text style={styles.name}>{data.name}</Text>
           </View>
 
           <List
-            data={data.descriptions}
+            data={data.diagnosis}
             ItemSeparatorComponent={Divider}
             renderItem={renderItem}
           />
 
           <Button
             style={styles.button}
-            onPress={() => navigation.navigate('Analysis')}
+            onPress={() => navigation.navigate("Analysis")}
           >
-            <Icon style={styles.icon} name='activity' size={1} />
+            <Icon style={styles.icon} name="activity" size={1} />
             Analyze
           </Button>
         </Layout>
       ) : (
-        <Spinner status='primary' />
+        <Spinner status="primary" />
       )}
     </Layout>
   );
@@ -77,28 +97,33 @@ export default function LoginScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   info: {
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   avatar: {
     width: 100,
-    height: 100,
+    height: 100
   },
   name: {
     fontSize: 20,
-    marginTop: 10,
+    marginTop: 10
   },
   button: {
     margin: 2,
-    alignSelf: 'center',
-    width: '80%',
-    backgroundColor: '#1d8efa',
+    alignSelf: "center",
+    width: "80%",
+    backgroundColor: "#1d8efa",
     borderRadius: 25,
-    height: 50,
+    height: 50
+  },
+  item: {
+    margin: 5,
+    backgroundColor: "#fff",
+    padding: 10
   },
   icon: {
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 });
