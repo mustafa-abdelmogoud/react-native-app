@@ -15,9 +15,9 @@ export default function LoginScreen() {
 
   useEffect(() => {
     async function fetchData() {
-      const json = await fetch("http://127.0.0.1:5000/analyze");
-      const data = await json.json();
-      setData(data);
+      // const json = await fetch("http://127.0.0.1:5000/analyze");
+      // const data = await json.json();
+      // setData(data); 
     }
     fetchData();
   }, []);

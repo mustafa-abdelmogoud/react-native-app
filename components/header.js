@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Constants from "expo-constants";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
 export default function LoginScreen() {
   return (
@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
   container: {
     marginTop: Constants.statusBarHeight,
     marginBottom: 30,
-    alignItems: "center"
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold"
-  }
+    fontWeight: 'bold',
+    color: '#1d8efa',
+  },
 });

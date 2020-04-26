@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Avatar,
   Layout,
@@ -11,6 +11,7 @@ import {
   Text,
 } from '@ui-kitten/components';
 import Icon from 'react-native-vector-icons/Feather';
+
 import Header from '../components/header';
 
 export default function LoginScreen({ navigation, route }) {
@@ -23,21 +24,19 @@ export default function LoginScreen({ navigation, route }) {
       // const data = await json.json();
       // setData(data);
       setData({
-        id: '1234',
-        name: 'nbjngbjnb',
-        descriptions: ['gnbngb', 'bmgmbkmgb'],
+        doctor: 'Abdelrhman Saied',
+        description: 'description one',
+        hospital: 'Jeeda Hospital',
+        diagnosis: '',
+        symptoms: ['symptom1'],
+        treatments: ['treatment1'],
       });
     }
     fetchData();
   }, []);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => navigation.navigate('Diagnosis')}
-    >
-      <ListItem title={item} description='DR. Abdelrahman' />
-    </TouchableOpacity>
+    <ListItem title={item} description='DR. Abdelrahman' />
   );
 
   return (
@@ -46,11 +45,6 @@ export default function LoginScreen({ navigation, route }) {
       {data ? (
         <Layout style={styles.container}>
           <View style={styles.info}>
-            <Avatar
-              style={styles.avatar}
-              size='giant'
-              source={require('../assets/avatar.png')}
-            />
             <Text style={styles.name}>{data.name}</Text>
           </View>
 
@@ -64,7 +58,7 @@ export default function LoginScreen({ navigation, route }) {
             style={styles.button}
             onPress={() => navigation.navigate('Analysis')}
           >
-            <Icon style={styles.icon} name='activity' size={1} />
+            <Icon name='activity' size={15} />
             Analyze
           </Button>
         </Layout>
@@ -82,23 +76,12 @@ const styles = StyleSheet.create({
   info: {
     alignSelf: 'center',
   },
-  avatar: {
-    width: 100,
-    height: 100,
-  },
+
   name: {
     fontSize: 20,
     marginTop: 10,
   },
   button: {
     margin: 2,
-    alignSelf: 'center',
-    width: '80%',
-    backgroundColor: '#1d8efa',
-    borderRadius: 25,
-    height: 50,
-  },
-  icon: {
-    fontSize: 20,
   },
 });
